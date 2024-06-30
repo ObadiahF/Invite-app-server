@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from "cors";
-import { createEvent, checkAccessToken, getEvent, getUser, addUserToEvent, removeUserFromEvent, createUser, deleteUser } from '../db/db.mjs';
+import { createEvent, checkAccessToken, getEvent, getUser, addUserToEvent, removeUserFromEvent, createUser, deleteUser } from './db/db.mjs';
 
 const app = express();
 const port = process.env.serverPort;
