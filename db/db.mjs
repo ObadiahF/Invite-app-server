@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { Event, Users } from './models.mjs'
 import { sendEventOut } from '../messaging/email.mjs'
 
-const MONGO_URI = process.env.uri
+const MONGO_URI = process.env.MONGODB_URI
 // Connect to MongoDB
 mongoose.connect(MONGO_URI, {
     serverSelectionTimeoutMS: 5000,

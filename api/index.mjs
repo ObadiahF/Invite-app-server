@@ -9,6 +9,10 @@ const port = process.env.serverPort;
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+    res.status(200).json({success: true, message: "The server is up and running!"})
+})
+
 app.post("/create", async (req, res) => {
     try {
         const data = await req.body;
