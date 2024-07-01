@@ -17,16 +17,16 @@ const transporter = nodemailer.createTransport({
 export const sendEventOut = async (creator, eventId) => {
     console.log("Sending out texts")
     const userList = await getAllUsers()
-    userList.forEach( async (u) => {
+    for (const u of userList) {
         let message = `
         New Event: https://events.obadiahfusco.com/event/${eventId}/${u._id.toString()}\n
         Stop Receiving Messages: https://events.obadiahfusco.com/stop
-        `
+        `;
         if (u._id.toString() === creator.toString()) {
-            message = `\nEvent Created: https://events.obadiahfusco.com/event/${eventId}/${u._id.toString()}`
+            message = `\nEvent Created: https://events.obadiahfusco.com/event/${eventId}/${u._id.toString()}`;
         }
-        await sendSMS(u.gate_way, message)
-    })
+        await sendSMS(u.gate_way, message);
+    }
 }
 
 // Send SMS via email

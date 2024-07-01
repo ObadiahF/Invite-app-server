@@ -40,7 +40,7 @@ export const createEvent = async (data, token) => {
             not_going: []
         });
 
-        sendEventOut(token._id, event._id.toString())
+        await sendEventOut(token._id, event._id.toString())
         return `${event._id.toString()}/${token._id.toString()}`;
     } catch (error) {
         console.error('Error creating event:', error);
