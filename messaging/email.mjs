@@ -19,11 +19,11 @@ export const sendEventOut = async (creator, eventId) => {
     const userList = await getAllUsers()
     userList.forEach( async (u) => {
         let message = `
-        New Event: http://event.obadiahfusco.com/event/${eventId}/${u._id.toString()}\n
-        Stop Receiving Messages: http://event.obadiahfusco.com/stop
+        New Event: https://events.obadiahfusco.com/event/${eventId}/${u._id.toString()}\n
+        Stop Receiving Messages: https://events.obadiahfusco.com/stop
         `
         if (u._id.toString() === creator.toString()) {
-            message = `\nEvent Created: http://event.obadiahfusco.com/event/${eventId}/${u._id.toString()}`
+            message = `\nEvent Created: https://events.obadiahfusco.com/event/${eventId}/${u._id.toString()}`
         }
         await sendSMS(u.gate_way, message)
     })
