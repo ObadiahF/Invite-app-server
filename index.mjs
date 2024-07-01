@@ -26,8 +26,8 @@ app.post("/create", async (req, res) => {
         } else {
             const event = await createEvent(data, validToken);
             if (!event) {
-                console.log("error with event");
                 res.sendStatus(400);
+                return
             }
             res.status(200).json({
                 link: event

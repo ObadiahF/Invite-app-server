@@ -14,15 +14,18 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-export const sendEventOut = async (excludedUser, eventId) => {
-
-    const userList = await getAllUsers(excludedUser)
-    userList.forEach((u) => {
-        const message = `
+export const sendEventOut = async (creator, eventId) => {
+    console.log("Sending out texts")
+    const userList = await getAllUsers()
+    userList.forEach( async (u) => {
+        let message = `
         New Event: http://event.obadiahfusco.com/event/${eventId}/${u._id.toString()}\n
         Stop Receiving Messages: http://event.obadiahfusco.com/stop
         `
-        sendSMS(u.gate_way, message)
+        if (u._id.toString() === creator.toString()) {
+            message = `\nEvent Created: http://event.obadiahfusco.com/event/${eventId}/${u._id.toString()}`
+        }
+        await sendSMS(u.gate_way, message)
     })
 }
 
@@ -41,10 +44,8 @@ const sendSMS = async (gateway, message) => {
         console.error('Error sending SMS:', error);
     }
 };
-/*
-const message = `
-        New Event: http://event.obadiahfusco.com/event/667f06b4412acd6792de2549/667f066b412acd6792de2546\n
-        Stop Receiving Messages: http://event.obadiahfusco.com/stop
-        `
-sendSMS("3606678831@txt.att.net", message)
+
+
+/*const message = "Event Created: http://event.obadiahfusco.com/event/667f06b4412acd6792de2549/667f066b412acd6792de2546"
+sendSMS(gateway here", message)
 */

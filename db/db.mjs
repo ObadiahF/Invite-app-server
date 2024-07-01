@@ -23,7 +23,6 @@ mongoose.connection.on('disconnected', () => {
 });
 
 export const createEvent = async (data, token) => {
-    
     try {
         const event = await Event.create({
             name: data.name,
@@ -91,14 +90,12 @@ export const getUser = async (id, number = null) => {
     }
 }
 
-export const getAllUsers = async (exludedPerson) => {
+export const getAllUsers = async () => {
     try {
-        const users = await Users.find({
-            _id: { $nin: [exludedPerson] }
-        })
+        const users = await Users.find();
         return users;
     } catch (error) {
-        console.error('Error adding user:', error);
+        console.error('Error getting users', error);
         return false;
     }
 
