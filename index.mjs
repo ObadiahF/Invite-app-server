@@ -7,7 +7,12 @@ const app = express();
 const port = process.env.serverPort;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {
+        origin: "https://obadiahfusco.com",
+        methods: ["GET", "POST"]
+    }
+));
 
 app.get("/", (req, res) => {
     res.status(200).json({success: true, message: "The server is up and running!"})
